@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BrandsItemCell" customModule="EBuy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="162" height="36"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="162" height="36"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brands Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VPj-VB-bWW" customClass="PaddingLabel" customModule="EBuy" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="162" height="36"/>
+                        <color key="backgroundColor" white="0.78911564625850339" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="36" id="HIo-z0-dxm"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="VPj-VB-bWW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="JTx-fG-bfE"/>
+                <constraint firstAttribute="trailing" secondItem="VPj-VB-bWW" secondAttribute="trailing" id="JvT-vc-cLD"/>
+                <constraint firstItem="VPj-VB-bWW" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="KCR-df-gZd"/>
+                <constraint firstAttribute="bottom" secondItem="VPj-VB-bWW" secondAttribute="bottom" id="aAj-Gt-GkU"/>
+            </constraints>
+            <size key="customSize" width="162" height="49"/>
+            <connections>
+                <outlet property="brandsNameLabel" destination="VPj-VB-bWW" id="680-0W-VkA"/>
+            </connections>
+            <point key="canvasLocation" x="115.94202898550725" y="111.49553571428571"/>
+        </collectionViewCell>
+    </objects>
+    <designables>
+        <designable name="VPj-VB-bWW">
+            <size key="intrinsicContentSize" width="81.5" height="16"/>
+        </designable>
+    </designables>
+</document>
