@@ -21,6 +21,14 @@ final class HomeDataSource: BaseDataSource {
         multiSectionModels = []
     }
     
+    init(with collectionView: UICollectionView) {
+        super.init()
+        
+        self.collectionView = collectionView
+        
+        multiCollectionSectionModels = []
+    }
+    
     
     override func refresh() {
         multiSectionModels = [[], [], [], [], [], [], [], []]
@@ -43,6 +51,17 @@ final class HomeDataSource: BaseDataSource {
         
         tableView?.reloadData()
     }
+    
+    func setupRecentlyViewedItems() {
+        
+        multiCollectionSectionModels = [[],[],[],[]]
+        
+        multiCollectionSectionModels[0].append(categoryItemCell)
+        multiCollectionSectionModels[1].append(categoryItemCell)
+        multiCollectionSectionModels[2].append(categoryItemCell)
+        multiCollectionSectionModels[3].append(categoryItemCell)
+        collectionView?.reloadData()
+    }
 }
 
 private extension HomeDataSource {
@@ -55,20 +74,40 @@ private extension HomeDataSource {
         return CellViewModel(cellIdentifier: CategoryCell.identifier)
     }
     
+    private var categoryItemCell: CellViewModel {
+        return CellViewModel(cellIdentifier: CategoryItemCell.identifier)
+    }
+    
     private var recentlyViewedCell: CellViewModel {
         return CellViewModel(cellIdentifier: RecentlyViewedCell.identifier)
+    }
+    
+    private var recentlyViewedItemCell: CellViewModel {
+        return CellViewModel(cellIdentifier: RecentlyViewedItemCell.identifier)
     }
     
     private var savedItemsCell: CellViewModel {
         return CellViewModel(cellIdentifier: SavedItemsCell.identifier)
     }
     
+    private var savedItemCell: CellViewModel {
+        return CellViewModel(cellIdentifier: SavedItemCell.identifier)
+    }
+    
     private var brandsCell: CellViewModel {
         return CellViewModel(cellIdentifier: BrandsCell.identifier)
     }
     
+    private var brandsItemCell: CellViewModel {
+        return CellViewModel(cellIdentifier: BrandsItemCell.identifier)
+    }
+    
     private var habitsCell: CellViewModel {
         return CellViewModel(cellIdentifier: HabitsCell.identifier)
+    }
+    
+    private var habitItemCell: CellViewModel {
+        return CellViewModel(cellIdentifier: HabitItemCell.identifier)
     }
 }
 
