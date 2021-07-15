@@ -12,9 +12,15 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var homeDataSource: HomeDataSource!
+    private var viewModel: HomeViewModelProtocol!
+    
     private var productsManager: ProductsManagerProtocol!
     private var offersManager: OffersManagerProtocol!
-    private var viewModel: HomeViewModelProtocol!
+    private var categoriesManager: CategoriesManagerProtocol!
+    private var recentlyViewedManager: RecentlyViewedManagerProtocol!
+    private var savedItemsManager: SavedItemsManagerProtocol!
+    private var brandsManager: BrandsManagerProtocol!
+    private var habitsManager: HabitsManagerProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +45,22 @@ class HomeViewController: BaseViewController {
     private func configureViewModel() {
         productsManager = ProductsManager()
         offersManager = OffersManager()
-        viewModel = HomeViewModel(with: productsManager, and: offersManager, coordinator: coordinator!)
-        homeDataSource = HomeDataSource(with: tableView)
+        categoriesManager = CategoriesManager()
+        recentlyViewedManager = RecentlyViewedManager()
+        savedItemsManager = SavedItemsManager()
+        brandsManager = BrandsManager()
+        habitsManager = HabitsManager()
+        
+        viewModel = HomeViewModel(productsManager: productsManager,
+                                  offersManager: offersManager,
+                                  categoriesManager: categoriesManager,
+                                  recentlyViewedManager: recentlyViewedManager,
+                                  savedItemsManager: savedItemsManager,
+                                  brandsManager: brandsManager,
+                                  habitsManager: habitsManager,
+                                  coordinator: coordinator!)
+        
+        homeDataSource = HomeDataSource(with: tableView, viewModel: viewModel)
         
         homeDataSource.refresh()
     }

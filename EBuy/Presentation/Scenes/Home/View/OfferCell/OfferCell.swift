@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class OfferCell: UITableViewCell {
+class OfferCell: UITableViewCell, TableCellConfigurable {
 
     @IBOutlet weak var offerNameLabel: UILabel!
     @IBOutlet weak var offerImageView: UIImageView!
@@ -36,9 +36,13 @@ class OfferCell: UITableViewCell {
         offerShadowView.layer.shadowOffset = CGSize(width: 4.0, height: 2.0)
     }
     
-    func configure(with offer: OfferModel) {
-        offerNameLabel.text = offer.name
-        let url = URL(string: offer.image ?? "")
+    func configure(with item: CellItem) {
+        
+        guard let model = item as? CellViewModel,
+              let data = model.userData[.data] as? OfferModel else { return }
+        
+        offerNameLabel.text = data.name
+        let url = URL(string: data.image ?? "")
         offerImageView.kf.setImage(with: url)
     }
     

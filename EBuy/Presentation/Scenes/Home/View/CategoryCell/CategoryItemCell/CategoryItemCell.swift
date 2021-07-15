@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class CategoryItemCell: UICollectionViewCell {
+class CategoryItemCell: UICollectionViewCell, CollectionCellConfigurable {
 
     @IBOutlet weak var categoryImageView: UIImageView!
     @IBOutlet weak var categoryNameLabel: UILabel!
@@ -31,10 +31,14 @@ class CategoryItemCell: UICollectionViewCell {
         categoryShadowView.layer.shadowOffset = CGSize(width: 4.0, height: 2.0)
     }
     
-    func configure(with category: CategoryModel) {
-        categoryNameLabel.text = category.category
-        categoryDescriptionLabel.text = category.description
-        let url = URL(string: category.image ?? "")
+    func configure(with item: CellItem) {
+        
+        guard let model = item as? CellViewModel,
+              let data = model.userData[.data] as? CategoryModel else { return }
+        
+        categoryNameLabel.text = data.category
+        categoryDescriptionLabel.text = data.description
+        let url = URL(string: data.image ?? "")
         categoryImageView.kf.setImage(with: url)
     }
 

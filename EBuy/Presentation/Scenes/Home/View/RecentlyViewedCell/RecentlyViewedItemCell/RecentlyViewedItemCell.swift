@@ -8,8 +8,8 @@
 import UIKit
 import Kingfisher
 
-class RecentlyViewedItemCell: UICollectionViewCell {
-
+class RecentlyViewedItemCell: UICollectionViewCell, CollectionCellConfigurable {
+    
     @IBOutlet weak var recentlyViewedImageView: UIImageView!
     @IBOutlet weak var recentlyViewedItemDescriptionLabel: UILabel!
     @IBOutlet weak var recentlyViewedShadowView: UIView!
@@ -30,9 +30,13 @@ class RecentlyViewedItemCell: UICollectionViewCell {
         recentlyViewedShadowView.layer.shadowOffset = CGSize(width: 4.0, height: 2.0)
     }
     
-    func configure(with item: RecentlyViewedModel) {
-        recentlyViewedItemDescriptionLabel.text = item.description
-        let url = URL(string: item.image ?? "")
+    func configure(with item: CellItem) {
+        
+        guard let model = item as? CellViewModel,
+              let data = model.userData[.data] as? RecentlyViewedModel else { return }
+        
+        recentlyViewedItemDescriptionLabel.text = data.description
+        let url = URL(string: data.image ?? "")
         recentlyViewedImageView.kf.setImage(with: url)
     }
 

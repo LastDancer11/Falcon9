@@ -17,9 +17,11 @@ class CategoryCell: UITableViewCell {
         super.awakeFromNib()
         
         collectionView.registerNib(class: CategoryItemCell.self)
-        collectionView.delegate = self
+        
+        setupCollectionViewFlowLayout()
         
         configureDataSource()
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -28,14 +30,20 @@ class CategoryCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    private func setupCollectionViewFlowLayout() {
+        let layout = UICollectionViewFlowLayout()
+           layout.scrollDirection = .horizontal
+           layout.itemSize = CGSize(width: 160, height: 220)
+           collectionView.contentInset = UIEdgeInsets(top: 0, left: 20 , bottom: 0, right: 20)
+           layout.minimumLineSpacing = 20
+           collectionView.collectionViewLayout = layout
+           collectionView.isPagingEnabled = true
+    }
+    
     func configureDataSource() {
         homeDataSource = HomeDataSource(with: collectionView)
         
-        homeDataSource.setupRecentlyViewedItems()
+        homeDataSource.setupCategoryItems()
     }
-    
-}
-
-extension CategoryCell: UICollectionViewDelegateFlowLayout {
     
 }

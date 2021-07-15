@@ -10,15 +10,17 @@ import UIKit
 class BrandsCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    private var homeDataSource: HomeDataSource!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
         collectionView.registerNib(class: BrandsItemCell.self)
         
-        if let flowLayout = self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-                flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
-            }
+        setupCollectionViewFlowLayout()
+        
+        configureDataSource()
         
     }
 
@@ -28,8 +30,19 @@ class BrandsCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure() {
+    private func setupCollectionViewFlowLayout() {
        
+        let layout = UICollectionViewFlowLayout()
+        layout.estimatedItemSize = CGSize(width: 1, height: 1)
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 20 , bottom: 0, right: 20)
+        collectionView.collectionViewLayout = layout
+        collectionView.isPagingEnabled = true
+    }
+    
+    func configureDataSource() {
+        homeDataSource = HomeDataSource(with: collectionView)
+        
+        homeDataSource.setupBrandsItems()
     }
     
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BrandsItemCell: UICollectionViewCell {
+class BrandsItemCell: UICollectionViewCell, CollectionCellConfigurable  {
 
     @IBOutlet weak var brandsNameLabel: UILabel!
     
@@ -16,8 +16,12 @@ class BrandsItemCell: UICollectionViewCell {
 
     }
     
-    func configure(with brand: BrandModel) {
-        brandsNameLabel.text = brand.name
+    func configure(with item: CellItem) {
+        
+        guard let model = item as? CellViewModel,
+              let data = model.userData[.data] as? BrandModel else { return }
+        
+        brandsNameLabel.text = data.name
     }
 
 }

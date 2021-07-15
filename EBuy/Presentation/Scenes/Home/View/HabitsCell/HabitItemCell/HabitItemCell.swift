@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class HabitItemCell: UICollectionViewCell {
+class HabitItemCell: UICollectionViewCell, CollectionCellConfigurable  {
 
     @IBOutlet weak var habitItemImageView: UIImageView!
     @IBOutlet weak var habitItemShadowView: UIView!
@@ -29,10 +29,14 @@ class HabitItemCell: UICollectionViewCell {
         habitItemShadowView.layer.shadowOffset = CGSize(width: 4.0, height: 2.0)
     }
     
-    func configure(with habit: HabitModel) {
-        habitItemNameLabel.text = habit.name
-        habitItemPriceLabel.text = habit.price
-        let url = URL(string: habit.image ?? "")
+    func configure(with item: CellItem) {
+        
+        guard let model = item as? CellViewModel,
+              let data = model.userData[.data] as? HabitModel else { return }
+        
+        habitItemNameLabel.text = data.name
+        habitItemPriceLabel.text = data.price
+        let url = URL(string: data.image ?? "")
         habitItemImageView.kf.setImage(with: url)
     }
 

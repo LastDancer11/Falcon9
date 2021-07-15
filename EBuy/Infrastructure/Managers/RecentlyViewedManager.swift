@@ -11,7 +11,7 @@ protocol RecentlyViewedManagerProtocol: AnyObject {
     func fetchRecentlyViewed(completion: @escaping ([RecentlyViewedModel]) -> Void)
 }
 
-class RecentlyManager: RecentlyViewedManagerProtocol {
+class RecentlyViewedManager: RecentlyViewedManagerProtocol {
     func fetchRecentlyViewed(completion: @escaping ([RecentlyViewedModel]) -> Void) {
         let url = "https://run.mocky.io/v3/128ee9b1-c6b2-4815-b78c-b07a8956c936"
         NetworkManager.shared.get(url: url) { (result: Result<[RecentlyViewedModel], Error>) in

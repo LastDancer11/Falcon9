@@ -11,11 +11,16 @@ class HabitsCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    private var homeDataSource: HomeDataSource!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         collectionView.registerNib(class: HabitItemCell.self)
         
+        setupCollectionViewFlowLayout()
+        
+        configureDataSource()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,10 +29,20 @@ class HabitsCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    
-    func configure() {
+    private func setupCollectionViewFlowLayout() {
+       
+        let layout = UICollectionViewFlowLayout()
+           layout.scrollDirection = .horizontal
+           layout.itemSize = CGSize(width: 170, height: 220)
+           collectionView.contentInset = UIEdgeInsets(top: 0, left: 20 , bottom: 0, right: 20)
+           collectionView.collectionViewLayout = layout
+           collectionView.isPagingEnabled = true
     }
     
-   
+    func configureDataSource() {
+        homeDataSource = HomeDataSource(with: collectionView)
+        
+        homeDataSource.setupHabitItems()
+    }
     
 }
