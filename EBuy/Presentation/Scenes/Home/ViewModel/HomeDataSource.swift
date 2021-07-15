@@ -9,8 +9,10 @@ import UIKit
 
 final class HomeDataSource: BaseDataSource {
     
+    // MARK: - Variables
     static private var viewModel: HomeViewModelProtocol!
     
+    // MARK: - Inits
     init(with tableView: UITableView, viewModel: HomeViewModelProtocol) {
         super.init()
         
@@ -30,11 +32,11 @@ final class HomeDataSource: BaseDataSource {
         singleCollectionSectionModels = []
     }
     
-    
+    // MARK: - Table View Setuper
     override func refresh() {
         multiSectionModels = [[], [], [], [], [], [], [], []]
         
-        HomeDataSource.viewModel.fetchOffers { fetchedOffers in
+        HomeDataSource.viewModel.fetchOffers { [unowned self] fetchedOffers in
             let offers = fetchedOffers
             DispatchQueue.main.async {
                 self.multiSectionModels[0].append(self.offerCell(data: offers[0]))
@@ -57,9 +59,10 @@ final class HomeDataSource: BaseDataSource {
         tableView?.reloadData()
     }
     
+    // MARK: - Collection View Setupers
     func setupCategoryItems() {
         
-        HomeDataSource.viewModel.fetchCategories { fetchedCategories in
+        HomeDataSource.viewModel.fetchCategories { [unowned self] fetchedCategories in
             let categories = fetchedCategories
             DispatchQueue.main.async {
                 for category in categories {
@@ -75,7 +78,7 @@ final class HomeDataSource: BaseDataSource {
     
     func setupRecentlyViewedItems() {
         
-        HomeDataSource.viewModel.fetchRecentlyViewed { fetchedData in
+        HomeDataSource.viewModel.fetchRecentlyViewed { [unowned self] fetchedData in
             let recentlyViewed = fetchedData
             
             DispatchQueue.main.async {
@@ -92,7 +95,7 @@ final class HomeDataSource: BaseDataSource {
     
     func setupSavedItems() {
         
-        HomeDataSource.viewModel.fetchSavedItems { savedItems in
+        HomeDataSource.viewModel.fetchSavedItems { [unowned self] savedItems in
             let items = savedItems
             DispatchQueue.main.async {
                 for item in items {
@@ -108,7 +111,7 @@ final class HomeDataSource: BaseDataSource {
     
     func setupBrandsItems() {
         
-        HomeDataSource.viewModel.fetchBrands { fetchedBrands in
+        HomeDataSource.viewModel.fetchBrands { [unowned self] fetchedBrands in
             let brands = fetchedBrands
             DispatchQueue.main.async {
                 for brand in brands {
@@ -124,7 +127,7 @@ final class HomeDataSource: BaseDataSource {
     
     func setupHabitItems() {
         
-        HomeDataSource.viewModel.fetchHabits { fetchedHabits in
+        HomeDataSource.viewModel.fetchHabits { [unowned self] fetchedHabits in
             let habits = fetchedHabits
             DispatchQueue.main.async {
                 for habit in habits {
@@ -139,6 +142,7 @@ final class HomeDataSource: BaseDataSource {
     }
 }
 
+// MARK: - Cell Registration
 private extension HomeDataSource {
     
     private func offerCell(data: OfferModel) -> CellViewModel {
@@ -193,21 +197,21 @@ private extension HomeDataSource {
     
 }
 
+// MARk - UITableView Delegate
 extension HomeDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
         if indexPath.row == 0 {
-          //  viewModel.coordinator.navigateToOfferCatalog(with: offersList[0].name ?? "")
-            print("tapped")
+            print("tapped 0")
         }
         
         if indexPath.row == 2 {
-         //   viewModel.coordinator.navigateToOfferCatalog(with: offersList[1].name ?? "")
+            print("tapped 2")
         }
         
         if indexPath.row == 3 {
-         //   viewModel.coordinator.navigateToOfferCatalog(with: offersList[2].name ?? "")
+            print("tapped 3")
         }
         
     }

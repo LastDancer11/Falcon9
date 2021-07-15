@@ -9,6 +9,7 @@ import UIKit
 
 class BaseDataSource: NSObject {
     
+    // MARK: - Variables
     var singleSectionModels: [CellItem]!
     var multiSectionModels: [[CellItem]]!
     
