@@ -11,10 +11,6 @@ class HabitsCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var dataSource: HabitsCellDataSource!
-    private var habitsManager: HabitsManagerProtocol!
-    private var viewModel: HabitsCellViewModel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -30,14 +26,8 @@ class HabitsCell: UITableViewCell {
     
     
     func configure() {
-        configureDataSource()
     }
     
-    private func configureDataSource() {
-        habitsManager = HabitsManager()
-        viewModel = HabitsCellViewModel(with: habitsManager)
-        dataSource = HabitsCellDataSource(with: collectionView, viewModel: viewModel)
-        dataSource.refresh()
-    }
+   
     
 }

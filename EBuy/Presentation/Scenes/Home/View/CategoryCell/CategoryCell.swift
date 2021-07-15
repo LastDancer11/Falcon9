@@ -11,11 +11,6 @@ class CategoryCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var dataSource: CategoriesCellDataSource!
-    private var categoryManager: CategoriesManagerProtocol!
-    private var viewModel: CategoriesCellViewModelProtocol!
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -30,15 +25,7 @@ class CategoryCell: UITableViewCell {
     }
     
     func configure() {
-        configureDataSource()
-    }
         
-        
-    private func configureDataSource() {
-        categoryManager = CategoriesManager()
-        viewModel = CategoriesCellViewModel(with: categoryManager)
-        dataSource = CategoriesCellDataSource(with: collectionView, viewModel: viewModel)
-        dataSource.refresh()
     }
     
 }

@@ -11,10 +11,6 @@ class SavedItemsCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var dataSource: SavedItemsCellDataSource!
-    private var savedItemManager: SavedItemsManagerProtocol!
-    private var viewModel: SavedItemsCellViewModel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -29,14 +25,7 @@ class SavedItemsCell: UITableViewCell {
     }
     
     func configure() {
-        configureDataSource()
-    }
-    
-    private func configureDataSource() {
-        savedItemManager = SavedItemsManager()
-        viewModel = SavedItemsCellViewModel(with: savedItemManager)
-        dataSource = SavedItemsCellDataSource(with: collectionView, viewModel: viewModel)
-        dataSource.refresh()
+        
     }
     
 }

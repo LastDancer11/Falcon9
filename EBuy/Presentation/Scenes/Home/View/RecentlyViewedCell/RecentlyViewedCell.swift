@@ -12,10 +12,6 @@ class RecentlyViewedCell: UITableViewCell {
     @IBOutlet weak var redDotView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var dataSource: RecentlyViewedCellDataSource!
-    private var categoryManager: RecentlyViewedManagerProtocol!
-    private var viewModel: RecentlyViewedCellViewModelProtocol!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -31,15 +27,6 @@ class RecentlyViewedCell: UITableViewCell {
     }
     
     func configure() {
-        configureDataSource()
-    }
-        
-        
-    private func configureDataSource() {
-        categoryManager = RecentlyManager()
-        viewModel = RecentlyViewedCellViewModel(with: categoryManager)
-        dataSource = RecentlyViewedCellDataSource(with: collectionView, viewModel: viewModel)
-        dataSource.refresh()
     }
     
 }

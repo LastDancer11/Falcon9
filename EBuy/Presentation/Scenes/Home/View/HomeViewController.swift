@@ -40,7 +40,7 @@ class HomeViewController: BaseViewController {
         productsManager = ProductsManager()
         offersManager = OffersManager()
         viewModel = HomeViewModel(with: productsManager, and: offersManager, coordinator: coordinator!)
-        homeDataSource = HomeDataSource(with: tableView, viewModel: viewModel)
+        homeDataSource = HomeDataSource(with: tableView)
         
         homeDataSource.refresh()
     }

@@ -7,87 +7,68 @@
 
 import UIKit
 
-class HomeDataSource: NSObject{
+final class HomeDataSource: BaseDataSource {
     
-    private var tableView: UITableView!
-    private var viewModel: HomeViewModelProtocol!
-    private var offersList = [OfferModel]()
     
-    init(with tableView: UITableView, viewModel: HomeViewModelProtocol) {
+    private var savedItems = ["saved item1", "item2", "Saved item3"]
+    
+    init(with tableView: UITableView) {
         super.init()
         
         self.tableView = tableView
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
+        self.tableView?.delegate = self
         
-        self.viewModel = viewModel
+        multiSectionModels = []
     }
     
-    func refresh() {
-        viewModel.fetchOffers { [weak self] offers in
-            self?.offersList = offers
-            
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
-            }
-        }
-    }
     
+    override func refresh() {
+        multiSectionModels = [[], [], [], [], [], [], [], []]
+       
+        multiSectionModels[0].append(offerCell)
+        
+        multiSectionModels[1].append(categoryCell)
+        
+        multiSectionModels[2].append(recentlyViewedCell)
+        
+        multiSectionModels[3].append(offerCell)
+        
+        multiSectionModels[4].append(offerCell)
+        
+        multiSectionModels[5].append(savedItemsCell)
+        
+        multiSectionModels[6].append(brandsCell)
+        
+        multiSectionModels[7].append(habitsCell)
+        
+        tableView?.reloadData()
+    }
 }
 
-extension HomeDataSource: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+private extension HomeDataSource {
+    
+    private var offerCell: CellViewModel {
+        return CellViewModel(cellIdentifier: OfferCell.identifier)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let cell = tableView.deque(OfferCell.self, for: indexPath)
-            if !offersList.isEmpty {
-                cell.configure(with: offersList[0])
-            }
-            return cell
-        }
-        if indexPath.row == 1 {
-            let cell = tableView.deque(CategoryCell.self, for: indexPath)
-            cell.configure()
-            return cell
-        }
-        if indexPath.row == 2 {
-            let cell = tableView.deque(OfferCell.self, for: indexPath)
-            if !offersList.isEmpty {
-                cell.configure(with: offersList[1])
-            }
-            return cell
-        }
-        if indexPath.row == 3 {
-            let cell = tableView.deque(OfferCell.self, for: indexPath)
-            if !offersList.isEmpty {
-                cell.configure(with: offersList[2])
-            }
-            return cell
-        }
-        if indexPath.row == 4 {
-            let cell = tableView.deque(RecentlyViewedCell.self, for: indexPath)
-            cell.configure()
-            return cell
-        }
-        if indexPath.row == 5 {
-            let cell = tableView.deque(SavedItemsCell.self, for: indexPath)
-            cell.configure()
-            return cell
-        }
-        if indexPath.row == 6 {
-            let cell = tableView.deque(BrandsCell.self, for: indexPath)
-            cell.configure()
-            return cell
-        }
-        if indexPath.row == 7 {
-            let cell = tableView.deque(HabitsCell.self, for: indexPath)
-            cell.configure()
-            return cell
-        }
-        return .init()
+    private var categoryCell: CellViewModel {
+        return CellViewModel(cellIdentifier: CategoryCell.identifier)
+    }
+    
+    private var recentlyViewedCell: CellViewModel {
+        return CellViewModel(cellIdentifier: RecentlyViewedCell.identifier)
+    }
+    
+    private var savedItemsCell: CellViewModel {
+        return CellViewModel(cellIdentifier: SavedItemsCell.identifier)
+    }
+    
+    private var brandsCell: CellViewModel {
+        return CellViewModel(cellIdentifier: BrandsCell.identifier)
+    }
+    
+    private var habitsCell: CellViewModel {
+        return CellViewModel(cellIdentifier: HabitsCell.identifier)
     }
 }
 
@@ -96,15 +77,16 @@ extension HomeDataSource: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: false)
         
         if indexPath.row == 0 {
-            viewModel.coordinator.navigateToOfferCatalog(with: offersList[0].name ?? "")
+          //  viewModel.coordinator.navigateToOfferCatalog(with: offersList[0].name ?? "")
+            print("tapped")
         }
         
         if indexPath.row == 2 {
-            viewModel.coordinator.navigateToOfferCatalog(with: offersList[1].name ?? "")
+         //   viewModel.coordinator.navigateToOfferCatalog(with: offersList[1].name ?? "")
         }
         
         if indexPath.row == 3 {
-            viewModel.coordinator.navigateToOfferCatalog(with: offersList[2].name ?? "")
+         //   viewModel.coordinator.navigateToOfferCatalog(with: offersList[2].name ?? "")
         }
         
     }

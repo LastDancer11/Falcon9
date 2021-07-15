@@ -10,10 +10,6 @@ import UIKit
 class BrandsCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    private var dataSource: BrandsCellDataSource!
-    private var brandsManager: BrandsManagerProtocol!
-    private var viewModel: BrandsCellViewModel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,14 +29,7 @@ class BrandsCell: UITableViewCell {
     }
     
     func configure() {
-        configureDataSource()
-    }
-    
-    private func configureDataSource() {
-        brandsManager = BrandsManager()
-        viewModel = BrandsCellViewModel(with: brandsManager)
-        dataSource = BrandsCellDataSource(with: collectionView, viewModel: viewModel)
-        dataSource.refresh()
+       
     }
     
 }
